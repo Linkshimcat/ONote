@@ -9,8 +9,14 @@ public class Main {
     public static void main(String[] args) {
 //      상속 테스트
         testSubjects();
+        //CsvIo();
+        new MainFrame();
 
+    }
 
+//    CSV 파일처리
+
+    public static void CsvIo () {
         WrongAnswerManager manager = new WrongAnswerManager();
         CsvManager csv = new CsvManager();
         ReviewScheduler scheduler = new ReviewScheduler();
