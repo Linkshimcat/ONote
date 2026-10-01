@@ -22,6 +22,16 @@ public class WrongAnswerManager {
         }
     }
 
+    public void update(int index, Subject subject, String content, String reason, String answer) { // 값 수정하기
+        if(index >= 0 && index < list.size()) {
+            WrongAnswer wa = list.get(index);
+            wa.setSubject(subject);
+            wa.setContent(content);
+            wa.setReason(reason);
+            wa.setAnswer(answer);
+        }
+    }
+
     // 과목 이름 찾기
     public ArrayList<WrongAnswer> searchBySubject(String subjectName) {
         ArrayList<WrongAnswer> result = new ArrayList<>();

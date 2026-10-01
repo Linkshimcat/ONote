@@ -60,5 +60,13 @@ public class WrongAnswer {
     public void setNextReviewDate(LocalDate nextReviewDate) {
         this.nextReviewDate = nextReviewDate;
     }
+    public void setSubject(Subject subject) {this.subject = subject;}
+    public void setContent(String content) {this.content = content;}
+    public void setReason(String reason) {this.reason = reason;}
+    public void setAnswer(String answer) {this.answer = answer;}
+
+
+
+
 
 }
