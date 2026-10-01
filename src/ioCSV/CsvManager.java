@@ -68,17 +68,24 @@ public class CsvManager {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
-                if(parts.length < 7) continue;
+                if (parts.length < 7) continue;
+
                 Subject subject = createSubject(parts[0]);
-                WrongAnswer wa = new WrongAnswer(subject, parts[1], parts[2], parts[3],
-                        (LocalDate.parse(parts[4])),
-                        (Integer.parseInt(parts[5])),
-                        LocalDate.parse(parts[6]));
-                list.add(wa);
+                if (subject == null) continue;        // ★ 여기 한 줄 추가
+
+                try {                                  // ★ 이 try-catch로 감싸기
+                    WrongAnswer wa = new WrongAnswer(subject, parts[1], parts[2], parts[3],
+                            LocalDate.parse(parts[4]),
+                            Integer.parseInt(parts[5]),
+                            LocalDate.parse(parts[6]));
+                    list.add(wa);
+                } catch (Exception ex) {
+                    System.out.println("형식이 잘못된 줄을 건너뜁니다: " + line);
+                }
             }
             br.close();
         } catch (IOException e) {
-            System.out.println("불러오기 실패: " + e.getMessage());
+            // 파일이 없으면 첫 실행이므로 조용히 넘어간다
         }
 
         return list;

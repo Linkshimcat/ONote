@@ -7,16 +7,12 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-//      상속 테스트
-        testSubjects();
-        //CsvIo();
+        /*testSubjects();
+        csvIo();*/
         new MainFrame();
-
     }
 
-//    CSV 파일처리
-
-    public static void CsvIo () {
+    public static void csvIo () {
         WrongAnswerManager manager = new WrongAnswerManager();
         CsvManager csv = new CsvManager();
         ReviewScheduler scheduler = new ReviewScheduler();
@@ -28,33 +24,25 @@ public class Main {
         WrongAnswer wa3 = new WrongAnswer(new EnglishSubject(), "본문 B 형식의 특정 단어", "단어 암기 부족", "words: Empty");
         manager.add(wa3);
 
-
-        // 테스팅
         for (WrongAnswer wa : manager.getAll()) {
             System.out.println(wa.getSubject().getName() + ", " + wa.getContent() + ", 단계:" + wa.getStage());
         }
 
-        // 1. 등록한 것 확인
         System.out.println("=== 등록 직후 ===");
         for (WrongAnswer wa : manager.getAll()) {
             System.out.println(wa.getSubject().getName() + ", " + wa.getContent() + ", 단계:" + wa.getStage() + ", 다음복습:" + wa.getNextReviewDate());
         }
 
-        // 2. 복습 완료 한 번 시켜보기 (단계 변하는지)
         scheduler.completeReview(wa1);
 
-        // 3. 저장
         csv.save(manager.getAll());
 
-        // 4. 다시 불러오기
         System.out.println("\n=== 불러온 결과 ===");
         for (WrongAnswer wa : csv.load()) {
             System.out.println(wa.getSubject().getName() + ", " + wa.getContent() + ", 단계:" + wa.getStage() + ", 다음복습:" + wa.getNextReviewDate());
         }
     }
 
-
-    //    상속-다형성 테스트
     public static void testSubjects() {
         Subject[] subjects = {
                 new KoreanSubject(),

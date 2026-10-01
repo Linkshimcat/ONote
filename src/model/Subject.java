@@ -10,5 +10,10 @@ public abstract class Subject {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public abstract String[] getWrongReasons();
 }

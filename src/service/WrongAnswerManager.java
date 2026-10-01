@@ -57,4 +57,18 @@ public class WrongAnswerManager {
         }
         return searchKeyword;
     }
+
+    public ArrayList<WrongAnswer> search(String subjectName, String keyword) {
+        if (subjectName.equals("전체")) {
+            return searchByKeyword(keyword);
+        }
+
+        ArrayList<WrongAnswer> result = new ArrayList<>();
+        for (WrongAnswer wa : searchBySubject(subjectName)) {
+            if (wa.getContent().contains(keyword)) {
+                result.add(wa);
+            }
+        }
+        return result;
+    }
 }
