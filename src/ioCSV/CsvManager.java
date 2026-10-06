@@ -80,7 +80,7 @@ public class CsvManager {
             }
             br.close();
         } catch (IOException e) {
-            System.out.println();
+            System.out.println("빈 예외");
         }
 
         return list;
