@@ -3,12 +3,10 @@ package ioCSV;
 import model.*;
 
 import java.util.ArrayList;
-// 쓰기용
-import java.io.FileWriter; // 파일 쓰기
-import java.io.IOException; // 파일 예외 처리
-// 읽기용
-import java.io.BufferedReader; // 파일 한 줄씩 읽기
-import java.io.FileReader; // 파일 읽기
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 
 public class CsvManager {
@@ -31,15 +29,13 @@ public class CsvManager {
                 subject = new ProgrammingSubject();
                 break;
             default:
-                subject = null; // 과목에서 없을경우 null 처리
+                subject = null;
         }
         return subject;
     }
 
-    // 파일 저장하기
     public void save(ArrayList<WrongAnswer> list) {
-        // 예외 처리 try catch
-        try { // 발생한 오류 코드
+        try {
             FileWriter fw = new FileWriter("data.csv");
 
             for (int i = 0; i < list.size(); i++) {
@@ -53,13 +49,12 @@ public class CsvManager {
                         + wa.getNextReviewDate() + "\n";
                 fw.write(line);
             }
-            fw.close(); // 파일 닫기 (안 닫으면 내용이 파일에 안들어갈 수 있음.)
-        } catch (IOException e) { // 예외 처리 (실패)가 발생 할 경우
+            fw.close();
+        } catch (IOException e) {
             System.out.println("저장 실패:" + e.getMessage());
         }
     }
 
-    // 파일 불러오기
     public ArrayList<WrongAnswer> load() {
         ArrayList<WrongAnswer> list = new ArrayList<>();
 
@@ -71,9 +66,9 @@ public class CsvManager {
                 if (parts.length < 7) continue;
 
                 Subject subject = createSubject(parts[0]);
-                if (subject == null) continue;        // ★ 여기 한 줄 추가
+                if (subject == null) continue;
 
-                try {                                  // ★ 이 try-catch로 감싸기
+                try {
                     WrongAnswer wa = new WrongAnswer(subject, parts[1], parts[2], parts[3],
                             LocalDate.parse(parts[4]),
                             Integer.parseInt(parts[5]),
@@ -85,7 +80,7 @@ public class CsvManager {
             }
             br.close();
         } catch (IOException e) {
-            // 파일이 없으면 첫 실행이므로 조용히 넘어간다
+            System.out.println();
         }
 
         return list;
