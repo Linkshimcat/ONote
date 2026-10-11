@@ -48,14 +48,14 @@ public class WrongAnswer {
     public LocalDate getCreatedDate() {
         return createdDate;
     }
+    public LocalDate getNextReviewDate() {
+        return nextReviewDate;
+    }
     public int getStage() {
         return stage;
     }
     public void setStage(int stage) {
         this.stage = stage;
-    }
-    public LocalDate getNextReviewDate() {
-        return nextReviewDate;
     }
     public void setNextReviewDate(LocalDate nextReviewDate) {
         this.nextReviewDate = nextReviewDate;

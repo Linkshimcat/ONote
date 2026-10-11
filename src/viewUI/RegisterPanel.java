@@ -45,7 +45,6 @@ public class RegisterPanel extends JPanel {
     }
 
     // 선택된 과목의 틀린 이유로 콤보를 채운다
-
     private void showInfo(String message) {
         JOptionPane pane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
         JDialog dialog = pane.createDialog(this, "알림");

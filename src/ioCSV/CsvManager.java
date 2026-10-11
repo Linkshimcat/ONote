@@ -37,7 +37,6 @@ public class CsvManager {
     public void save(ArrayList<WrongAnswer> list) {
         try {
             FileWriter fw = new FileWriter("data.csv");
-
             for (int i = 0; i < list.size(); i++) {
                 WrongAnswer wa = list.get(i);
                 String line = wa.getSubject().getName() + ","
@@ -57,7 +56,6 @@ public class CsvManager {
 
     public ArrayList<WrongAnswer> load() {
         ArrayList<WrongAnswer> list = new ArrayList<>();
-
         try {
             BufferedReader br = new BufferedReader(new FileReader("data.csv"));
             String line;

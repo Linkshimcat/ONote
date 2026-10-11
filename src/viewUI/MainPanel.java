@@ -12,7 +12,7 @@ public class MainPanel extends JPanel {
     private WrongAnswerManager manager;
     private ReviewScheduler scheduler;
     private CsvManager csv;
-    private JLabel countLabel;          // MainFrame 헤더의 개수 라벨
+    private JLabel countLabel;  // MainFrame 헤더의 개수 라벨
 
     private DefaultTableModel model;
     private JTable table;
@@ -152,7 +152,7 @@ public class MainPanel extends JPanel {
         if (wa == null) return;
 
         String content = JOptionPane.showInputDialog(this, "문제 내용", wa.getContent());
-        if (content == null) return;                     // 취소를 누르면 null
+        if (content == null) return;  // 취소를 누르면 null
         String reason = JOptionPane.showInputDialog(this, "틀린 이유", wa.getReason());
         if (reason == null) return;
         String answer = JOptionPane.showInputDialog(this, "정답", wa.getAnswer());

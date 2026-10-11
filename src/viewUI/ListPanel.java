@@ -3,7 +3,6 @@ package viewUI;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
 import model.*;
 import service.*;
 import ioCSV.*;
@@ -30,7 +29,7 @@ public class ListPanel extends JPanel {
 
         table = new JTable(model);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.setAutoCreateRowSorter(true);      // ★ 열 제목을 누르면 정렬
+        table.setAutoCreateRowSorter(true);      // 열 제목을 누르면 정렬
         add(new JScrollPane(table), BorderLayout.CENTER);
 
         JButton btnDelete = new JButton("삭제");
@@ -69,7 +68,7 @@ public class ListPanel extends JPanel {
             return;
         }
 
-        int modelRow = table.convertRowIndexToModel(viewRow);   // ★ 정렬된 화면 → 실제 순서
+        int modelRow = table.convertRowIndexToModel(viewRow);   //정렬된 화면 → 실제 순서
         WrongAnswer wa = manager.getAll().get(modelRow);
 
         int choice = JOptionPane.showConfirmDialog(this,

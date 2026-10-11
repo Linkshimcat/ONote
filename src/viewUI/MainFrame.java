@@ -117,7 +117,7 @@ public class MainFrame {
 
         if (todayCount > 0) {
             JOptionPane.showMessageDialog(frame,
-                    "오늘 복습할 내용이 " + todayCount + "개 있습니다.",
+                    "오늘 복습할 오답이 " + todayCount + "개 있습니다.",
                     "복습 알림",
                     JOptionPane.INFORMATION_MESSAGE);
         }
