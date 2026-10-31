@@ -26,7 +26,7 @@ public class ReviewPanel extends JPanel {
         statusLabel.setBorder(BorderFactory.createEmptyBorder(12, 16, 12, 16));
         add(statusLabel, BorderLayout.NORTH);
 
-        String[] columns = {"과목", "문제 내용", "틀린 이유", "복습 단계", "다음 복습일"};
+        String[] columns = {"과목", "문항 번호", "문제 내용", "틀린 이유", "복습 단계", "다음 복습일"};
         model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -55,6 +55,7 @@ public class ReviewPanel extends JPanel {
         for (WrongAnswer wa : todayList) {
             model.addRow(new Object[]{
                     wa.getSubject().getName(),
+                    wa.getQNumbers(),
                     wa.getContent(),
                     wa.getReason(),
                     wa.getStage() + "단계",

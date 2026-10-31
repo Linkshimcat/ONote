@@ -16,7 +16,7 @@ public class MainPanel extends JPanel {
 
     private DefaultTableModel model;
     private JTable table;
-    private ArrayList<WrongAnswer> todayList = new ArrayList<>();   // 표의 행 순서와 1:1
+    private ArrayList<WrongAnswer> todayList = new ArrayList<>();
 
     private JLabel lblSubject = new JLabel("과목: -");
     private JLabel lblReason  = new JLabel("틀린 이유: -");
@@ -33,7 +33,7 @@ public class MainPanel extends JPanel {
         setLayout(new BorderLayout());
 
         // ───── 가운데: 오늘 복습 목록 ─────
-        String[] columns = {"과목", "문제 내용", "다음 복습일"};
+        String[] columns = {"과목", "문항 번호", "문제 내용", "다음 복습일"};
         model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -68,9 +68,9 @@ public class MainPanel extends JPanel {
         infoPanel.add(lblStage);
 
         JButton btnComplete = new JButton("복습 완료");
-        JButton btnEdit     = new JButton("수정");
-        JButton btnDelete   = new JButton("삭제");
-        JButton btnSave     = new JButton("저장");
+        JButton btnEdit = new JButton("수정");
+        JButton btnDelete = new JButton("삭제");
+        JButton btnSave = new JButton("저장");
 
         btnComplete.addActionListener(e -> completeReview());
         btnEdit.addActionListener(e -> editSelected());
@@ -95,10 +95,10 @@ public class MainPanel extends JPanel {
     public void refreshTable() {
         model.setRowCount(0);                                  // 기존 행 모두 비우기
         todayList = scheduler.getTodayList(manager.getAll());
-
         for (WrongAnswer wa : todayList) {
             model.addRow(new Object[]{
                     wa.getSubject().getName(),
+                    wa.getQNumbers(),
                     wa.getContent(),
                     wa.getNextReviewDate()
             });
@@ -151,6 +151,8 @@ public class MainPanel extends JPanel {
         WrongAnswer wa = getSelected();
         if (wa == null) return;
 
+        String Qnumbers = JOptionPane.showInputDialog(this, "문항 번호", wa.getQNumbers());
+        if (Qnumbers == null) return;
         String content = JOptionPane.showInputDialog(this, "문제 내용", wa.getContent());
         if (content == null) return;  // 취소를 누르면 null
         String reason = JOptionPane.showInputDialog(this, "틀린 이유", wa.getReason());
@@ -158,7 +160,7 @@ public class MainPanel extends JPanel {
         String answer = JOptionPane.showInputDialog(this, "정답", wa.getAnswer());
         if (answer == null) return;
 
-        manager.update(manager.getAll().indexOf(wa), wa.getSubject(), content, reason, answer);
+        manager.update(manager.getAll().indexOf(wa), wa.getSubject(), Qnumbers,  content, reason, answer);
         refreshTable();
     }
 

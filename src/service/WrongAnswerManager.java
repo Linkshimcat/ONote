@@ -22,10 +22,11 @@ public class WrongAnswerManager {
         }
     }
 
-    public void update(int index, Subject subject, String content, String reason, String answer) { // 값 수정하기
+    public void update(int index, Subject subject, String Qnumbers, String content, String reason, String answer) { // 값 수정하기
         if(index >= 0 && index < list.size()) {
             WrongAnswer wa = list.get(index);
             wa.setSubject(subject);
+            wa.setQNumbers(Qnumbers);
             wa.setContent(content);
             wa.setReason(reason);
             wa.setAnswer(answer);

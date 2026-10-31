@@ -2,7 +2,6 @@ import model.*;
 import service.*;
 import ioCSV.*;
 import viewUI.*;
-
 import java.util.*;
 
 public class Main {
@@ -17,13 +16,6 @@ public class Main {
         CsvManager csv = new CsvManager();
         ReviewScheduler scheduler = new ReviewScheduler();
 
-        WrongAnswer wa1 = new WrongAnswer(new MathSubject(), "도형의 방정식", "계산 실수", "x=6");
-        manager.add(wa1);
-        WrongAnswer wa2 = new WrongAnswer(new ProgrammingSubject(), "익명 함수", "개념 부족", "() -> {})");
-        manager.add(wa2);
-        WrongAnswer wa3 = new WrongAnswer(new EnglishSubject(), "본문 B 형식의 특정 단어", "단어 암기 부족", "words: Empty");
-        manager.add(wa3);
-
         for (WrongAnswer wa : manager.getAll()) {
             System.out.println(wa.getSubject().getName() + ", " + wa.getContent() + ", 단계:" + wa.getStage());
         }
@@ -33,7 +25,7 @@ public class Main {
             System.out.println(wa.getSubject().getName() + ", " + wa.getContent() + ", 단계:" + wa.getStage() + ", 다음복습:" + wa.getNextReviewDate());
         }
 
-        scheduler.completeReview(wa1);
+//        scheduler.completeReview(wa1);
 
         csv.save(manager.getAll());
 

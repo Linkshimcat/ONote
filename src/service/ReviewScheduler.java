@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.*;
 
 public class ReviewScheduler {
-    private final int[] cycles = {1, 3, 7, 14, 30}; //망각곡선의 주기
+    private final int[] cycles = {1, 3, 7, 14, 30, 60, 90}; //망각곡선의 주기
 
     public void completeReview(WrongAnswer wa) {
         int stage = wa.getStage();

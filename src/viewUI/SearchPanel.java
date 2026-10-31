@@ -21,6 +21,7 @@ public class SearchPanel extends JPanel {
 
         String[] subjects = {"전체", "국어", "영어", "수학", "프로그래밍", "한국사"};
         subjectBox = new JComboBox<>(subjects);
+        subjectBox.addActionListener(e -> search());
 
         JButton btnSearch = new JButton("검색");
         btnSearch.addActionListener(e -> search());
@@ -34,7 +35,7 @@ public class SearchPanel extends JPanel {
         top.add(resultLabel);
         add(top, BorderLayout.NORTH);
 
-        String[] columns = {"과목", "문제 내용", "틀린 이유", "정답", "다음 복습일"};
+        String[] columns = {"과목", "문항 번호", "문제 내용", "틀린 이유", "정답", "다음 복습일"};
         model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -58,6 +59,7 @@ public class SearchPanel extends JPanel {
         for (WrongAnswer wa : result) {
             model.addRow(new Object[]{
                     wa.getSubject().getName(),
+                    wa.getQNumbers(),
                     wa.getContent(),
                     wa.getReason(),
                     wa.getAnswer(),

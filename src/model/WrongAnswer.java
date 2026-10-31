@@ -5,6 +5,7 @@ import java.time.LocalDate; // 자바 표준 날짜 클래스 api
 public class WrongAnswer {
     private Subject subject; // 과목
     private String content; // 문제 내용
+    private String Qnumbers; // 문항 번호
     private String reason; // 틀린 이유
     private String answer; // 정답
     private LocalDate createdDate; // 생성 등록일
@@ -12,9 +13,10 @@ public class WrongAnswer {
     private LocalDate nextReviewDate; // 다음 복습일
 
     // 생성자
-    public WrongAnswer(Subject subject, String content, String reason, String answer) {
+    public WrongAnswer(Subject subject, String Qnumbers, String content, String reason, String answer) {
         this.subject = subject;
         this.content = content;
+        this.Qnumbers = Qnumbers;
         this.reason = reason;
         this.answer = answer;
         this.createdDate = LocalDate.now();
@@ -23,9 +25,10 @@ public class WrongAnswer {
     }
 
     // 오버로딩
-    public WrongAnswer(Subject subject, String content, String reason, String answer, LocalDate createdDate, int stage, LocalDate nextReviewDate) {
+    public WrongAnswer(Subject subject, String Qnumbers, String content, String reason, String answer, LocalDate createdDate, int stage, LocalDate nextReviewDate) {
         this.subject = subject;
         this.content = content;
+        this.Qnumbers = Qnumbers;
         this.reason = reason;
         this.answer = answer;
         this.createdDate = createdDate;
@@ -45,6 +48,7 @@ public class WrongAnswer {
     public String getAnswer() {
         return answer;
     }
+    public String getQNumbers() {return Qnumbers;}
     public LocalDate getCreatedDate() {
         return createdDate;
     }
@@ -62,11 +66,8 @@ public class WrongAnswer {
     }
     public void setSubject(Subject subject) {this.subject = subject;}
     public void setContent(String content) {this.content = content;}
+    public void setQNumbers(String Qnumbers) {this.Qnumbers = Qnumbers;}
     public void setReason(String reason) {this.reason = reason;}
     public void setAnswer(String answer) {this.answer = answer;}
-
-
-
-
 
 }
