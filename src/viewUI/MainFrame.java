@@ -21,16 +21,14 @@ public class MainFrame {
     private ArchivePanel archivePanel;
 
     public MainFrame() {
-        System.out.println("프로그램 시작");
         for (WrongAnswer wa : csv.load()) {
             manager.add(wa);
-            System.out.println("csv 불러오기 :" + wa.getSubject() + " 성공");
         }
         int todayCount = scheduler.getTodayList(manager.getAll()).size();
 
 
         JFrame frame = new JFrame("ONote");
-        frame.setSize(1000, 650);
+        frame.setSize(1200, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
 
@@ -126,6 +124,13 @@ public class MainFrame {
             public void windowClosing(WindowEvent e) {
                 csv.save(manager.getAll());
                 System.out.println("프로그램 종료 (저장 완료)");
+            }
+        });
+
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
+            public void run() {
+                csv.save(manager.getAll());
             }
         });
 

@@ -25,11 +25,6 @@ public class WrongAnswer {
         this.nextReviewDate = this.createdDate.plusDays(1); //plusDays의 특징은 월말,연말을 알아서 처리해준다. (예: 1월 31일에 plusDays(1)을 해주면 2월 1일 이렇게 나옴)
     }
 
-    // 오버로딩 : 8개 값 (보관 여부 없음 -> 보관 안 된 상태로 복원)
-    public WrongAnswer(Subject subject, String Qnumbers, String content, String reason, String answer, LocalDate createdDate, int stage, LocalDate nextReviewDate) {
-        this(subject, Qnumbers, content, reason, answer, createdDate, stage, nextReviewDate, false);
-    }
-
     // 오버로딩 : CSV 복원용 (보관 여부까지 받음)
     public WrongAnswer(Subject subject, String Qnumbers, String content, String reason, String answer, LocalDate createdDate, int stage, LocalDate nextReviewDate, boolean archived) {
         this.archived = archived;
@@ -55,7 +50,9 @@ public class WrongAnswer {
     public String getAnswer() {
         return answer;
     }
-    public String getQNumbers() {return Qnumbers;}
+    public String getQNumbers() {
+        return Qnumbers;
+    }
     public LocalDate getCreatedDate() {
         return createdDate;
     }

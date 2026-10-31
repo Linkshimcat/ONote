@@ -34,16 +34,21 @@ public class CsvManager {
         return subject;
     }
 
+    // CSV 한 칸에 들어갈 글자 정리 (쉼표/줄바꿈이 있으면 열이 밀리므로 공백으로 바꾼다)
+    private String clean(String text) {
+        return text.replace(",", " ").replace("\n", " ").replace("\r", " ");
+    }
+
     public void save(ArrayList<WrongAnswer> list) {
         try {
             FileWriter fw = new FileWriter("data.csv");
             for (int i = 0; i < list.size(); i++) {
                 WrongAnswer wa = list.get(i);
                 String line = wa.getSubject().getName() + ","
-                        + wa.getQNumbers() + ","
-                        + wa.getContent() + ","
-                        + wa.getReason() + ","
-                        + wa.getAnswer() + ","
+                        + clean(wa.getQNumbers()) + ","
+                        + clean(wa.getContent()) + ","
+                        + clean(wa.getReason()) + ","
+                        + clean(wa.getAnswer()) + ","
                         + wa.getCreatedDate() + ","
                         + wa.getStage() + ","
                         + wa.getNextReviewDate() + ","
@@ -82,7 +87,7 @@ public class CsvManager {
             }
             br.close();
         } catch (IOException e) {
-            System.out.println();
+            System.out.println("data.csv 불러오기를 실패했어요.");
         }
 
         return list;

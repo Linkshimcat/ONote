@@ -89,7 +89,7 @@ public class ArchivePanel extends JPanel {
 
         scheduler.restart(wa);   // 보관 해제 + 1단계부터 다시
         JOptionPane.showMessageDialog(this,
-                "처음부터 다시 복습합니다.\n다음 복습일: " + wa.getNextReviewDate());
+                "수고했어요! 처음부터 다시 복습합니다.\n다음 복습일: " + wa.getNextReviewDate());
         refreshTable();
     }
 
