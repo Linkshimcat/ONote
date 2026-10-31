@@ -35,7 +35,7 @@ public class SearchPanel extends JPanel {
         top.add(resultLabel);
         add(top, BorderLayout.NORTH);
 
-        String[] columns = {"과목", "문항 번호", "문제 내용", "틀린 이유", "정답", "다음 복습일"};
+        String[] columns = {"과목", "문항 번호", "문제 내용", "틀린 이유", "정답", "등록일", "다음 복습일"};
         model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -63,7 +63,8 @@ public class SearchPanel extends JPanel {
                     wa.getContent(),
                     wa.getReason(),
                     wa.getAnswer(),
-                    wa.getNextReviewDate()
+                    wa.getCreatedDate(),
+                    wa.isArchived() ? "-" : wa.getNextReviewDate()
             });
         }
 

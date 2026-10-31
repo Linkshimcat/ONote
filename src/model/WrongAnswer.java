@@ -9,7 +9,7 @@ public class WrongAnswer {
     private String reason; // 틀린 이유
     private String answer; // 정답
     private LocalDate createdDate; // 생성 등록일
-    private int stage; // 복습 단계 (0단계부터 4단계 까지)
+    private int stage; // 복습 단계 (0단계부터 6단계 까지)
     private LocalDate nextReviewDate; // 다음 복습일
     private boolean archived; // 보관함 여부 (망각곡선 주기를 모두 마치면 true)
 

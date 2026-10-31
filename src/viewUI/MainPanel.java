@@ -21,6 +21,7 @@ public class MainPanel extends JPanel {
     private JLabel lblSubject = new JLabel("과목: -");
     private JLabel lblReason  = new JLabel("틀린 이유: -");
     private JLabel lblAnswer  = new JLabel("정답: -");
+    private JLabel lblCreated = new JLabel("등록일: -");
     private JLabel lblStage   = new JLabel("복습: -");
     private JProgressBar progressBar = new JProgressBar(0, 1);  // 복습 진행 막대
 
@@ -34,7 +35,7 @@ public class MainPanel extends JPanel {
         setLayout(new BorderLayout());
 
         // ───── 가운데: 오늘 복습 목록 ─────
-        String[] columns = {"과목", "문항 번호", "문제 내용", "다음 복습일"};
+        String[] columns = {"과목", "문항 번호", "문제 내용", "등록일", "다음 복습일"};
         model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -62,11 +63,12 @@ public class MainPanel extends JPanel {
     // 오른쪽 패널 조립
     private JPanel createDetailPanel() {
         progressBar.setMaximum(scheduler.getTotalReviews());   // 최대값 = 전체 복습 횟수
-        JPanel infoPanel = new JPanel(new GridLayout(6, 1, 0, 6));
+        JPanel infoPanel = new JPanel(new GridLayout(7, 1, 0, 6));
         infoPanel.add(new JLabel("상세 정보"));
         infoPanel.add(lblSubject);
         infoPanel.add(lblReason);
         infoPanel.add(lblAnswer);
+        infoPanel.add(lblCreated);
         infoPanel.add(lblStage);
         infoPanel.add(progressBar);
 
@@ -103,6 +105,7 @@ public class MainPanel extends JPanel {
                     wa.getSubject().getName(),
                     wa.getQNumbers(),
                     wa.getContent(),
+                    wa.getCreatedDate(),
                     wa.getNextReviewDate()
             });
         }
@@ -120,6 +123,7 @@ public class MainPanel extends JPanel {
         lblSubject.setText("과목: " + wa.getSubject().getName());
         lblReason.setText("틀린 이유: " + wa.getReason());
         lblAnswer.setText("정답: " + wa.getAnswer());
+        lblCreated.setText("등록일: " + wa.getCreatedDate());
         int done = scheduler.getCompletedReviews(wa);
         lblStage.setText("복습: " + done + "/" + scheduler.getTotalReviews() + "회 완료");
         progressBar.setValue(done);
@@ -129,6 +133,7 @@ public class MainPanel extends JPanel {
         lblSubject.setText("과목: -");
         lblReason.setText("틀린 이유: -");
         lblAnswer.setText("정답: -");
+        lblCreated.setText("등록일: -");
         lblStage.setText("복습: -");
         progressBar.setValue(0);
     }

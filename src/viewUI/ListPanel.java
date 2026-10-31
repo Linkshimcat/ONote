@@ -19,7 +19,7 @@ public class ListPanel extends JPanel {
         this.csv = csv;
         setLayout(new BorderLayout());
 
-        String[] columns = {"과목", "문항 번호", "문제 내용", "틀린 이유", "정답", "복습 단계", "다음 복습일"};
+        String[] columns = {"과목", "문항 번호", "문제 내용", "틀린 이유", "정답", "등록일", "복습 단계", "다음 복습일"};
         model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -56,8 +56,9 @@ public class ListPanel extends JPanel {
                     wa.getContent(),
                     wa.getReason(),
                     wa.getAnswer(),
+                    wa.getCreatedDate(),
                     wa.isArchived() ? "보관" : wa.getStage() + "단계",
-                    wa.getNextReviewDate()
+                    wa.isArchived() ? "-" : wa.getNextReviewDate()
             });
         }
     }
