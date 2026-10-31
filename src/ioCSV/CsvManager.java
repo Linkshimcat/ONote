@@ -46,7 +46,8 @@ public class CsvManager {
                         + wa.getAnswer() + ","
                         + wa.getCreatedDate() + ","
                         + wa.getStage() + ","
-                        + wa.getNextReviewDate() + "\n";
+                        + wa.getNextReviewDate() + ","
+                        + wa.isArchived() + "\n";
                 fw.write(line);
             }
             fw.close();
@@ -68,10 +69,12 @@ public class CsvManager {
                 if (subject == null) continue;
 
                 try {
+                    boolean archived = parts.length >= 9 && Boolean.parseBoolean(parts[8]); // 옛 8열 파일도 읽을 수 있게
                     WrongAnswer wa = new WrongAnswer(subject, parts[1], parts[2], parts[3], parts[4],
                             LocalDate.parse(parts[5]),
                             Integer.parseInt(parts[6]),
-                            LocalDate.parse(parts[7]));
+                            LocalDate.parse(parts[7]),
+                            archived);
                     list.add(wa);
                 } catch (Exception ex) {
                     System.out.println("형식이 잘못된 줄을 건너뜁니다: " + line);
@@ -79,7 +82,7 @@ public class CsvManager {
             }
             br.close();
         } catch (IOException e) {
-            // 파일이 아직 없으면 빈 목록으로 시작
+            System.out.println();
         }
 
         return list;

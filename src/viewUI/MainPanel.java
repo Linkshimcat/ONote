@@ -142,8 +142,12 @@ public class MainPanel extends JPanel {
         if (wa == null) return;
 
         scheduler.completeReview(wa);
-        JOptionPane.showMessageDialog(this,
-                "복습 완료 처리했습니다.\n다음 복습일: " + wa.getNextReviewDate());
+        if (wa.isArchived()) {
+            JOptionPane.showMessageDialog(this, "모든 복습 단계를 마쳤습니다!\n보관함으로 이동했습니다.");
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "복습 완료 처리했습니다.\n다음 복습일: " + wa.getNextReviewDate());
+        }
         refreshTable();
     }
 

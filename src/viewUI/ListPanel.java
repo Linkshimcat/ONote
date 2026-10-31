@@ -56,7 +56,7 @@ public class ListPanel extends JPanel {
                     wa.getContent(),
                     wa.getReason(),
                     wa.getAnswer(),
-                    wa.getStage() + "단계",
+                    wa.isArchived() ? "보관" : wa.getStage() + "단계",
                     wa.getNextReviewDate()
             });
         }

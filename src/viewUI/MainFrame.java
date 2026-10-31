@@ -18,6 +18,7 @@ public class MainFrame {
     private ListPanel listPanel;
     private ReviewPanel reviewPanel;
     private SearchPanel searchPanel;
+    private ArchivePanel archivePanel;
 
     public MainFrame() {
         System.out.println("프로그램 시작");
@@ -36,9 +37,15 @@ public class MainFrame {
         JPanel headerPanel = new JPanel(new BorderLayout());
         headerPanel.setBorder(BorderFactory.createEmptyBorder(12, 16, 12, 16));
 
+
         JLabel logoLabel = new JLabel("오노트");
+        ImageIcon raw = new ImageIcon("icons/OnoteLogo.png");
+        Image scaled = raw.getImage().getScaledInstance(28, 28, Image.SCALE_SMOOTH);
+        logoLabel.setIcon(new ImageIcon(scaled));
+
         logoLabel.setFont(logoLabel.getFont().deriveFont(Font.BOLD, 25f));
         logoLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        logoLabel.setIconTextGap(8);
         logoLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -56,12 +63,14 @@ public class MainFrame {
         listPanel = new ListPanel(manager, csv);
         reviewPanel = new ReviewPanel(manager, scheduler, countLabel);
         searchPanel = new SearchPanel(manager);
+        archivePanel = new ArchivePanel(manager, scheduler);
 
         cardPanel.add(mainPanel, "메인");
         cardPanel.add(new RegisterPanel(manager), "등록");
         cardPanel.add(reviewPanel, "복습");
         cardPanel.add(listPanel, "목록");
         cardPanel.add(searchPanel, "검색");
+        cardPanel.add(archivePanel, "보관함");
 
 
         JButton btnMain = new JButton("메인");
@@ -69,6 +78,7 @@ public class MainFrame {
         JButton btnReview = new JButton("오늘 복습");
         JButton btnList = new JButton("전체 목록");
         JButton btnSearch = new JButton("검색");
+        JButton btnArchive = new JButton("보관함");
 
 
         btnMain.addActionListener(e -> {
@@ -89,13 +99,19 @@ public class MainFrame {
             cardLayout.show(cardPanel, "검색");
         });
 
-        JPanel menuPanel = new JPanel(new GridLayout(5, 1, 0, 8));
+        btnArchive.addActionListener(e -> {
+            archivePanel.refreshTable();
+            cardLayout.show(cardPanel, "보관함");
+        });
+
+        JPanel menuPanel = new JPanel(new GridLayout(6, 1, 0, 8));
         menuPanel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
         menuPanel.add(btnMain);
         menuPanel.add(btnList);
         menuPanel.add(btnRegister);
         menuPanel.add(btnReview);
         menuPanel.add(btnSearch);
+        menuPanel.add(btnArchive);
 
         JPanel menuWrapper = new JPanel(new BorderLayout());
         menuWrapper.add(menuPanel, BorderLayout.NORTH);
