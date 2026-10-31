@@ -18,6 +18,16 @@ public class ReviewScheduler {
         wa.setNextReviewDate(LocalDate.now().plusDays(cycles[stage]));
     }
 
+    // 전체 복습 횟수 (주기 개수)
+    public int getTotalReviews() {
+        return cycles.length;
+    }
+
+    // 지금까지 마친 복습 횟수 (보관된 오답은 전부 마친 것)
+    public int getCompletedReviews(WrongAnswer wa) {
+        return wa.isArchived() ? cycles.length : wa.getStage();
+    }
+
     // 보관함에서 꺼내 처음부터 다시 복습
     public void restart(WrongAnswer wa) {
         wa.setArchived(false);

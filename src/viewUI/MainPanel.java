@@ -21,7 +21,8 @@ public class MainPanel extends JPanel {
     private JLabel lblSubject = new JLabel("과목: -");
     private JLabel lblReason  = new JLabel("틀린 이유: -");
     private JLabel lblAnswer  = new JLabel("정답: -");
-    private JLabel lblStage   = new JLabel("복습 단계: -");
+    private JLabel lblStage   = new JLabel("복습: -");
+    private JProgressBar progressBar = new JProgressBar(0, 1);  // 복습 진행 막대
 
     public MainPanel(WrongAnswerManager manager, ReviewScheduler scheduler,
                      CsvManager csv, JLabel countLabel) {
@@ -60,12 +61,14 @@ public class MainPanel extends JPanel {
 
     // 오른쪽 패널 조립
     private JPanel createDetailPanel() {
-        JPanel infoPanel = new JPanel(new GridLayout(5, 1, 0, 6));
+        progressBar.setMaximum(scheduler.getTotalReviews());   // 최대값 = 전체 복습 횟수
+        JPanel infoPanel = new JPanel(new GridLayout(6, 1, 0, 6));
         infoPanel.add(new JLabel("상세 정보"));
         infoPanel.add(lblSubject);
         infoPanel.add(lblReason);
         infoPanel.add(lblAnswer);
         infoPanel.add(lblStage);
+        infoPanel.add(progressBar);
 
         JButton btnComplete = new JButton("복습 완료");
         JButton btnEdit = new JButton("수정");
@@ -117,14 +120,17 @@ public class MainPanel extends JPanel {
         lblSubject.setText("과목: " + wa.getSubject().getName());
         lblReason.setText("틀린 이유: " + wa.getReason());
         lblAnswer.setText("정답: " + wa.getAnswer());
-        lblStage.setText("복습 단계: " + wa.getStage() + "단계");
+        int done = scheduler.getCompletedReviews(wa);
+        lblStage.setText("복습: " + done + "/" + scheduler.getTotalReviews() + "회 완료");
+        progressBar.setValue(done);
     }
 
     private void clearDetail() {
         lblSubject.setText("과목: -");
         lblReason.setText("틀린 이유: -");
         lblAnswer.setText("정답: -");
-        lblStage.setText("복습 단계: -");
+        lblStage.setText("복습: -");
+        progressBar.setValue(0);
     }
 
     // 선택된 행의 오답을 돌려준다. 선택 안 했으면 안내 후 null
@@ -146,7 +152,7 @@ public class MainPanel extends JPanel {
             JOptionPane.showMessageDialog(this, "모든 복습 단계를 마쳤습니다!\n보관함으로 이동했습니다.");
         } else {
             JOptionPane.showMessageDialog(this,
-                    "복습 완료 처리했습니다.\n다음 복습일: " + wa.getNextReviewDate());
+                    "복습 완료 처리했습니다. (" + scheduler.getCompletedReviews(wa) + "/" + scheduler.getTotalReviews() + "회 완료)\n다음 복습일: " + wa.getNextReviewDate());
         }
         refreshTable();
     }
